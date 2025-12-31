@@ -189,6 +189,38 @@ data/
 5. **Review**: Weekly drift reviews by domain experts
 6. **Rollback**: If hallucination rate > 20%, consider immediate rollback
 
+
+## Explainability (Role-based)
+
+This section describes how parsing decisions are explained to different stakeholders:
+
+### For Product Managers
+**Audience**: System health, trends, risk signals
+- **What to Show**: Invariant pass rates, drift metrics over time, alert frequency
+- **How to Present**:  
+  - "Schema validity: 95% (Day 0) → 90% (Day 1) - slight degradation, investigate"  
+  - "Hallucination rate: 5% → 15% - 3x increase, recommend human review"  
+  - "Canary status: ALERT - extraction patterns shifting, trending review needed"
+- **Focus**: High-level system health signals, no technical details
+
+### For Clinicians/Domain Experts
+**Audience**: Evidence grounding, uncertainty, limitations
+- **What to Show**: Extraction accuracy, evidence span grounding, confidence scores
+- **How to Present**:  
+  - "Symptom 'headache' extracted from 'mild headache' - evidence grounded ✓"  
+  - "Emotion 'calm' found with 65% confidence - moderate uncertainty"  
+  - "Evidence span 'intrusive thoughts' appears in journal, but polarity contradicted in another entry - needs review"
+- **Focus**: Evidence quality, not assertions, limitations transparently
+
+### For End Users
+**Audience**: High-level, non-alarming, trust-preserving
+- **What to Show**: Only clear, well-grounded insights
+- **How to Present**:  
+  - "We found 'headache' in your journal from 12/15 morning"  
+  - "This is mentioned in your original entry, so we're confident in flagging it"  
+  - "When we're less certain, we don't include it - your privacy and accuracy matter most"
+- **Focus**: Transparency about what we found and confidence, avoid jargon
+
 ## Future Enhancements
 
 - [ ] Add statistical significance tests for drift detection
